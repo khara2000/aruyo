@@ -11,8 +11,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class MainActivity extends Activity{
+public class MainActivity extends Activity implements CamPreView.OnCodeScannedListener{
 	private Button startButton;
+	private CamPreView preview;
 	private static final int MENU_ID_MENU1 = (Menu.FIRST + 1);
 	
 	@Override
@@ -20,11 +21,12 @@ public class MainActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		startButton = (Button)findViewById(R.id.button1);
+		preview = (CamPreView)findViewById(R.id.camPreView1);
 		startButton.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_LONG).show();
+				preview.startCapture(MainActivity.this);
 			}
 			
 		});
@@ -50,5 +52,11 @@ public class MainActivity extends Activity{
         }
         return ret;
     }
+
+	@Override
+	public void onCodeScanned(String scannedCode) {
+    	Toast.makeText(this, "あるよ!" + scannedCode, Toast.LENGTH_LONG).show();
+		
+	}
     
 }
