@@ -1,4 +1,4 @@
-package com.exampe.aruyo;
+package com.example.aruyo;
 
 import com.example.aruyo.R;
 
